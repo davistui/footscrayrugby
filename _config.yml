@@ -1,0 +1,106 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole site, values
+# which you are expected to set up once and rarely edit after that.
+
+# Site settings
+title: Footscray Rugby Club
+email: info@footscrayrugby.com.au
+description: >-
+  Official website of Footscray Rugby Club - Melbourne's premier community rugby club.
+  Join us for rugby, friendship, and tradition in the heart of the western suburbs.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://YOUR-NGROK-ID.ngrok.io" # Replace with your ngrok URL
+twitter_username: footscrayrugby
+github_username:  footscrayrugby
+
+# Build settings
+markdown: kramdown
+theme: null
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-archives
+
+# Pagination
+paginate: 6
+paginate_path: "/news/page:num/"
+
+# Collections
+collections:
+  players:
+    output: true
+    permalink: /:collection/:name
+  fixtures:
+    output: true
+    permalink: /:collection/:name
+  news:
+    output: true
+    permalink: /:collection/:year/:month/:day/:title
+  products:
+    output: true
+    permalink: /shop/:name
+  sponsors:
+    output: true
+    permalink: /:collection/:name
+
+# Archives
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+    - year
+    - month
+  layouts:
+    category: archive-category
+    tag: archive-tag
+    year: archive-year
+    month: archive-month
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/
+    year: /archives/:year/
+    month: /archives/:year/:month/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "players"
+    values:
+      layout: "player"
+  - scope:
+      path: ""
+      type: "fixtures"
+    values:
+      layout: "fixture"
+  - scope:
+      path: ""
+      type: "news"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "products"
+    values:
+      layout: "product"
+  - scope:
+      path: ""
+      type: "sponsors"
+    values:
+      layout: "sponsor"
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

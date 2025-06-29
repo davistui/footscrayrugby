@@ -1,0 +1,84 @@
+{
+  "fixtures": [
+    {
+      "date": "2025-06-15",
+      "opponent": "Melbourne Rugby Club",
+      "venue": "Footscray Park",
+      "time": "3:00 PM",
+      "competition": "Dewar Shield",
+      "tickets_url": "#",
+      "home": true,
+      "grade": "1st XV"
+    },
+    {
+      "date": "2025-06-22",
+      "opponent": "Box Hill Rugby Club",
+      "venue": "Box Hill Rugby Ground",
+      "time": "2:30 PM",
+      "competition": "Dewar Shield",
+      "tickets_url": "#",
+      "home": false,
+      "grade": "1st XV"
+    },
+    {
+      "date": "2025-06-29",
+      "opponent": "Harlequins Rugby Club",
+      "venue": "Footscray Park",
+      "time": "3:00 PM",
+      "competition": "Dewar Shield",
+      "tickets_url": "#",
+      "home": true,
+      "grade": "1st XV"
+    }
+  ],
+  "results": [
+    {
+      "date": "2025-06-01",
+      "opponent": "Uni Blues Rugby Club",
+      "venue": "Footscray Park",
+      "time": "3:00 PM",
+      "competition": "Dewar Shield Round 1",
+      "home": true,
+      "grade": "1st XV",
+      "homeScore": 24,
+      "awayScore": 21,
+      "result": "win",
+      "photos": [
+        "/assets/images/results/2025-06-01-uni-blues-1.jpg",
+        "/assets/images/results/2025-06-01-uni-blues-2.jpg"
+      ]
+    },
+    {
+      "date": "2025-05-25",
+      "opponent": "Quins Rugby Club",
+      "venue": "Quins Ground",
+      "time": "2:30 PM",
+      "competition": "Dewar Shield Round 2",
+      "home": false,
+      "grade": "1st XV",
+      "homeScore": 17,
+      "awayScore": 19,
+      "result": "loss",
+      "photos": [
+        "/assets/images/results/2025-05-25-quins-1.jpg"
+      ]
+    },
+    {
+      "date": "2025-05-18",
+      "opponent": "Southern Districts",
+      "venue": "Footscray Park",
+      "time": "3:00 PM",
+      "competition": "Dewar Shield Round 3",
+      "home": true,
+      "grade": "1st XV",
+      "homeScore": 31,
+      "awayScore": 14,
+      "result": "win",
+      "photos": [
+        "/assets/images/results/2025-05-18-southern-1.jpg",
+        "/assets/images/results/2025-05-18-southern-2.jpg",
+        "/assets/images/results/2025-05-18-southern-3.jpg"
+      ]
+    }
+  ]
+}

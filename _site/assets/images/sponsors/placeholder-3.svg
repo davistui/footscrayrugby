@@ -1,0 +1,5 @@
+<svg width="200" height="120" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="120" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <text x="100" y="60" text-anchor="middle" dominant-baseline="middle" fill="#f57c00" font-family="Arial, sans-serif" font-size="14" font-weight="bold">GOLD SPONSOR</text>
+  <text x="100" y="80" text-anchor="middle" dominant-baseline="middle" fill="#f57c00" font-family="Arial, sans-serif" font-size="12">PREMIUM</text>
+</svg>

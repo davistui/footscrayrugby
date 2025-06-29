@@ -1,0 +1,65 @@
+---
+layout: default
+title: Test Snipcart
+---
+
+<div class="container" style="padding: 40px 0;">
+  <h1>Snipcart Test Page</h1>
+  
+  <div style="border: 1px solid #ddd; padding: 20px; margin: 20px 0;">
+    <h3>Simple Test Product</h3>
+    <p>Price: $10.00 AUD</p>
+    
+    <button class="snipcart-add-item btn btn-primary"
+            data-item-id="test-product-simple"
+            data-item-price="10.00"
+            data-item-url="http://localhost:4000/test-snipcart"
+            data-item-description="Test product for Snipcart"
+            data-item-name="Test Product Simple"
+            data-item-shippable="false">
+      Add Simple Test Product to Cart
+    </button>
+  </div>
+  
+  <div style="border: 1px solid #ddd; padding: 20px; margin: 20px 0;">
+    <h3>Polo Shirt Test</h3>
+    <p>Price: $45.00 AUD</p>
+    
+    <button class="snipcart-add-item btn btn-primary"
+            data-item-id="FRUC-POLO-2025"
+            data-item-price="45.00"
+            data-item-url="/test-snipcart"
+            data-item-description="Footscray Rugby Polo 2025"
+            data-item-name="Footscray Rugby Polo 2025"
+            data-item-shippable="false"
+            data-item-custom1-name="Size"
+            data-item-custom1-options="S|M|L|XL|XXL"
+            data-item-custom2-name="Color"
+            data-item-custom2-options="Navy|Gold">
+      Add Polo to Cart
+    </button>
+  </div>
+  
+  <div style="margin: 20px 0;">
+    <h3>Debug Info</h3>
+    <button onclick="console.log('Snipcart:', window.Snipcart); alert('Check console for Snipcart object')">
+      Check Snipcart Object
+    </button>
+  </div>
+</div>
+
+<script>
+document.addEventListener('snipcart.ready', function() {
+  console.log('Snipcart is ready!');
+  alert('Snipcart loaded successfully!');
+});
+
+// Check if Snipcart is loading
+setTimeout(function() {
+  if (window.Snipcart) {
+    console.log('Snipcart object exists:', window.Snipcart);
+  } else {
+    console.log('Snipcart object not found');
+  }
+}, 3000);
+</script>

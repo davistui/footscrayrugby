@@ -1,0 +1,76 @@
+---
+layout: default
+---
+
+<div class="product-page">
+  <div class="container">
+    <div class="product-layout">
+      <div class="product-gallery">
+        {% if page.image %}
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="product-main-image">
+        {% endif %}
+      </div>
+      
+      <div class="product-details">
+        <h1 class="product-name">{{ page.title }}</h1>
+        <p class="product-sku">SKU: {{ page.sku }}</p>
+        
+        <div class="product-price-box">
+          <span class="product-price">${{ page.price }} AUD</span>
+          {% if page.gst_included %}
+          <span class="gst-notice">GST included</span>
+          {% endif %}
+          {% if page.stock %}
+          <span class="stock-status in-stock">In Stock</span>
+          {% else %}
+          <span class="stock-status out-of-stock">Out of Stock</span>
+          {% endif %}
+        </div>
+        
+        <div class="product-description">
+          <p>{{ page.description }}</p>
+        </div>
+        
+        {% if page.pickup_only %}
+        <div class="pickup-notice">
+          <h4>📍 Pickup Only</h4>
+          <p><strong>Location:</strong> {{ page.pickup_location }}</p>
+          <p><strong>Instructions:</strong> {{ page.pickup_instructions }}</p>
+        </div>
+        {% endif %}
+        
+        <div class="product-info-section">
+          {% if page.sizes %}
+          <div class="product-options">
+            <label>Available Sizes:</label>
+            <p style="font-weight: 600; margin: 0;">{% for size in page.sizes %}{{ size }}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+          </div>
+          {% endif %}
+          
+          {% if page.colors %}
+          <div class="product-options">
+            <label>Available Colors:</label>
+            <p style="font-weight: 600; margin: 0;">{% for color in page.colors %}{{ color }}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+          </div>
+          {% endif %}
+          
+          <div class="product-actions">
+            <button type="button" class="btn btn-primary btn-add-to-cart" disabled>
+              <span style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                Coming Soon
+              </span>
+            </button>
+            <p style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: var(--gray-600);">
+              Online ordering will be available soon.<br>
+              Please contact the club for purchase inquiries.
+            </p>
+          </div>
+        </div>
+        
+        <div class="product-content">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+---
+layout: default
+---
+
+<div class="player-profile">
+  <div class="container">
+    <div class="player-header">
+      {% if page.photo %}
+      <div class="player-photo">
+        <img src="{{ page.photo | relative_url }}" alt="{{ page.name }}">
+      </div>
+      {% endif %}
+      
+      <div class="player-info">
+        <h1 class="player-name">{{ page.name }}</h1>
+        <div class="player-details">
+          <span class="player-number">#{{ page.number }}</span>
+          <span class="player-position">{{ page.position }}</span>
+        </div>
+        
+        <div class="player-stats">
+          <div class="stat">
+            <span class="stat-label">Height</span>
+            <span class="stat-value">{{ page.height }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Weight</span>
+            <span class="stat-value">{{ page.weight }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Debut</span>
+            <span class="stat-value">{{ page.debut }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Games</span>
+            <span class="stat-value">{{ page.games }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Tries</span>
+            <span class="stat-value">{{ page.tries }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="player-bio">
+      <h2>Biography</h2>
+      <p>{{ page.bio }}</p>
+      {{ content }}
+    </div>
+  </div>
+</div>

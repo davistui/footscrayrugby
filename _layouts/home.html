@@ -1,0 +1,251 @@
+---
+layout: default
+---
+
+<!-- Hero Section with Countdown -->
+<section class="hero">
+  <div class="hero-background">
+    <!-- Carousel Background Images -->
+    <div class="hero-carousel">
+      <div class="hero-slide active" style="background-image: url('/assets/images/carousel/491109018_1190048919580469_4190630953952171414_n.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('/assets/images/carousel/493272904_1201617251756969_5772549528173391929_n.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('/assets/images/carousel/493927344_1200869508498410_7069793745988610021_n.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('/assets/images/carousel/494676524_1206316871287007_1009948140509832401_n.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('/assets/images/carousel/502927696_1226139955971365_6292606899384637662_n.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('/assets/images/carousel/505244853_1231534882098539_9023940864648423134_n.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('/assets/images/carousel/505444643_1231538105431550_51737142915425017_n.jpg')"></div>
+      <div class="hero-slide" style="background-image: url('/assets/images/carousel/505461008_1231421018776592_5447673438633555140_n.jpg')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="hero-title">Footscray Rugby Union Club</h1>
+      
+      <div class="match-countdown" id="matchCountdown">
+        <h2 class="countdown-title">Next Match</h2>
+        <div class="countdown-teams">
+          <div class="countdown-team">
+            <img src="/assets/images/club logos/doggies.webp" alt="Footscray" class="countdown-logo">
+            <span class="countdown-team-name">Footscray</span>
+          </div>
+          <div class="countdown-vs">VS</div>
+          <div class="countdown-team">
+            <img id="opponentLogo" src="/assets/images/logos/opponent-placeholder.svg" alt="Opponent" class="countdown-logo">
+            <span class="countdown-team-name" id="nextOpponent">Loading...</span>
+          </div>
+        </div>
+        <div class="countdown-info">
+          <span class="venue" id="nextVenue"></span>
+        </div>
+        <div class="countdown-timer" id="countdownTimer">
+          <div class="countdown-item">
+            <span class="countdown-number" id="days">00</span>
+            <span class="countdown-label">Days</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="hours">00</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="minutes">00</span>
+            <span class="countdown-label">Minutes</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="seconds">00</span>
+            <span class="countdown-label">Seconds</span>
+          </div>
+        </div>
+        <a href="/fixtures" class="btn btn-primary" id="buyTickets">View Fixtures</a>
+      </div>
+      
+      <p class="hero-tagline">Pride • Passion • Community</p>
+    </div>
+  </div>
+</section>
+
+<!-- Fixtures Section -->
+<section class="section fixtures-section">
+  <div class="container">
+    <h2 class="section-title">Upcoming Fixtures</h2>
+    <div class="fixtures-grid" id="fixturesGrid">
+      <!-- Fixtures will be loaded here -->
+    </div>
+    <div class="section-footer">
+      <a href="{{ '/fixtures' | relative_url }}" class="btn btn-secondary">View All Fixtures</a>
+    </div>
+  </div>
+</section>
+
+<!-- Custom Content from index.html -->
+{{ content }}
+
+<!-- Latest News Section -->
+<section class="section news-section">
+  <div class="container">
+    <h2 class="section-title">News</h2>
+    <div class="news-grid">
+      {% assign sorted_news = site.news | sort: 'date' | reverse %}
+      {% for post in sorted_news limit:3 %}
+      <article class="news-card">
+        {% if post.image %}
+        <div class="news-image">
+          <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+        </div>
+        {% endif %}
+        <div class="news-content">
+          <h3 class="news-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <time class="news-date">{{ post.date | date: "%B %d, %Y" }}</time>
+          <p class="news-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+          <a href="{{ post.url | relative_url }}" class="read-more">Read more →</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="section-footer">
+      <a href="{{ '/news' | relative_url }}" class="btn btn-secondary">View All News</a>
+    </div>
+  </div>
+</section>
+
+<!-- Merchandise Section - Hidden -->
+<!--
+<section class="section merchandise-section">
+  <div class="container">
+    <h2 class="section-title">Merchandise</h2>
+    <div class="products-carousel">
+      
+      <div class="product-card">
+        <div class="product-image">
+          <img src="/assets/images/Merchandise/dvZpKKig.jpeg" alt="Footscray Home Jersey 2025">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Footscray Home Jersey 2025</h3>
+          <p class="product-price">$120.00</p>
+          <a href="/shop/home-jersey-2025" class="btn btn-primary btn-sm">Shop Now</a>
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="product-image">
+          <img src="/assets/images/Merchandise/dvZpKKig.jpeg" alt="Footscray Training Jersey">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Footscray Training Jersey</h3>
+          <p class="product-price">$89.00</p>
+          <a href="/shop/training-jersey" class="btn btn-primary btn-sm">Shop Now</a>
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="product-image">
+          <img src="/assets/images/Merchandise/dvZpKKig.jpeg" alt="Footscray Rugby Shorts">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Footscray Rugby Shorts</h3>
+          <p class="product-price">$65.00</p>
+          <a href="/shop/rugby-shorts" class="btn btn-primary btn-sm">Shop Now</a>
+        </div>
+      </div>
+      
+    </div>
+    <div class="section-footer">
+      <a href="{{ '/shop' | relative_url }}" class="btn btn-secondary">Visit Shop</a>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- Sponsors Section -->
+<section class="section sponsors-section">
+  <div class="container">
+    <h2 class="section-title">Partners</h2>
+    <div style="text-align: center; margin-bottom: var(--spacing-xl);">
+      <p style="font-size: 1.125rem; color: var(--gray-700); max-width: 600px; margin: 0 auto;">
+        We're proud to partner with local businesses and organizations who share our commitment to community rugby. Together, we're building something special in Melbourne's west.
+      </p>
+    </div>
+    <div class="sponsors-carousel-container" style="display: none;">
+      <div class="sponsors-carousel" id="sponsorsCarousel">
+        {% for sponsor in site.sponsors %}
+        {% if sponsor.featured %}
+        <div class="sponsor-card">
+          <a href="{{ sponsor.website }}" target="_blank" rel="noopener">
+            <img src="{{ sponsor.logo | relative_url }}" alt="{{ sponsor.name }}">
+            <h4>{{ sponsor.name }}</h4>
+          </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <!-- Placeholder sponsors -->
+        <div class="sponsor-card">
+          <a href="#" target="_blank" rel="noopener">
+            <img src="/assets/images/sponsors/placeholder-1.svg" alt="Local Business Partner">
+            <h4>Local Business Partner</h4>
+          </a>
+        </div>
+        <div class="sponsor-card">
+          <a href="#" target="_blank" rel="noopener">
+            <img src="/assets/images/sponsors/placeholder-2.svg" alt="Community Supporter">
+            <h4>Community Supporter</h4>
+          </a>
+        </div>
+        <div class="sponsor-card">
+          <a href="#" target="_blank" rel="noopener">
+            <img src="/assets/images/sponsors/placeholder-3.svg" alt="Gold Sponsor">
+            <h4>Gold Sponsor</h4>
+          </a>
+        </div>
+        <div class="sponsor-card">
+          <a href="#" target="_blank" rel="noopener">
+            <img src="/assets/images/sponsors/placeholder-1.svg" alt="Silver Sponsor">
+            <h4>Silver Sponsor</h4>
+          </a>
+        </div>
+        <div class="sponsor-card">
+          <a href="#" target="_blank" rel="noopener">
+            <img src="/assets/images/sponsors/placeholder-2.svg" alt="Bronze Sponsor">
+            <h4>Bronze Sponsor</h4>
+          </a>
+        </div>
+        <!-- Duplicate cards for seamless loop -->
+        <div class="sponsor-card">
+          <a href="#" target="_blank" rel="noopener">
+            <img src="/assets/images/sponsors/placeholder-3.svg" alt="Gold Sponsor">
+            <h4>Gold Sponsor</h4>
+          </a>
+        </div>
+        <div class="sponsor-card">
+          <a href="#" target="_blank" rel="noopener">
+            <img src="/assets/images/sponsors/placeholder-1.svg" alt="Local Business Partner">
+            <h4>Local Business Partner</h4>
+          </a>
+        </div>
+        <div class="sponsor-card">
+          <a href="#" target="_blank" rel="noopener">
+            <img src="/assets/images/sponsors/placeholder-2.svg" alt="Community Supporter">
+            <h4>Community Supporter</h4>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="section-footer">
+      <a href="{{ '/sponsors' | relative_url }}" class="btn btn-secondary">View All Partners</a>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="section newsletter-section">
+  <div class="container">
+    <div class="newsletter-content">
+      <h2 class="section-title">Stay Connected</h2>
+      <p>Join our newsletter for exclusive updates, match results, and special offers</p>
+      <form class="newsletter-form-large" action="https://formspree.io/f/xkgbkaew" method="post">
+        <input type="email" name="email" placeholder="Enter your email address" required>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <p class="newsletter-prize">Subscribe for a chance to win official merchandise!</p>
+    </div>
+  </div>
+</section>
