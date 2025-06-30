@@ -37,9 +37,39 @@ document.addEventListener('DOMContentLoaded', function() {
   const navbarToggle = document.getElementById('navbarToggle');
   const navbarMenu = document.getElementById('navbarMenu');
   
+  // Create mobile menu overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'mobile-menu-overlay';
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  `;
+  document.body.appendChild(overlay);
+  
   if (navbarToggle && navbarMenu) {
-    navbarToggle.addEventListener('click', function() {
+    function toggleMenu() {
+      const isActive = navbarMenu.classList.contains('active');
       navbarMenu.classList.toggle('active');
+      
+      if (!isActive) {
+        // Opening menu
+        overlay.style.opacity = '1';
+        overlay.style.visibility = 'visible';
+        document.body.style.overflow = 'hidden';
+      } else {
+        // Closing menu
+        overlay.style.opacity = '0';
+        overlay.style.visibility = 'hidden';
+        document.body.style.overflow = '';
+      }
       
       // Animate hamburger menu
       const spans = navbarToggle.querySelectorAll('span');
@@ -52,16 +82,31 @@ document.addEventListener('DOMContentLoaded', function() {
         spans[1].style.opacity = '1';
         spans[2].style.transform = 'none';
       }
+    }
+    
+    navbarToggle.addEventListener('click', toggleMenu);
+    
+    // Close menu when clicking overlay
+    overlay.addEventListener('click', function() {
+      if (navbarMenu.classList.contains('active')) {
+        toggleMenu();
+      }
     });
     
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-      if (!navbarToggle.contains(event.target) && !navbarMenu.contains(event.target)) {
-        navbarMenu.classList.remove('active');
-        const spans = navbarToggle.querySelectorAll('span');
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
+    // Close menu when clicking a nav link
+    const navLinks = navbarMenu.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        if (navbarMenu.classList.contains('active')) {
+          toggleMenu();
+        }
+      });
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && navbarMenu.classList.contains('active')) {
+        toggleMenu();
       }
     });
   }
