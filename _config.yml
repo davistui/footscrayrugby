@@ -22,7 +22,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-paginate
-  - jekyll-archives
 
 # Pagination
 paginate: 6
@@ -46,23 +45,7 @@ collections:
     output: true
     permalink: /:collection/:name
 
-# Archives
-jekyll-archives:
-  enabled:
-    - categories
-    - tags
-    - year
-    - month
-  layouts:
-    category: archive-category
-    tag: archive-tag
-    year: archive-year
-    month: archive-month
-  permalinks:
-    category: /categories/:name/
-    tag: /tags/:name/
-    year: /archives/:year/
-    month: /archives/:year/:month/
+# Archives configuration removed for GitHub Pages compatibility
 
 # Defaults
 defaults:

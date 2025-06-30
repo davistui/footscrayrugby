@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+<article class="sponsor-profile">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">{{ page.title }}</h1>
+      {% if page.tagline %}
+      <p class="page-subtitle">{{ page.tagline }}</p>
+      {% endif %}
+    </div>
+    
+    <div class="page-content">
+      {% if page.logo %}
+      <div class="sponsor-logo" style="text-align: center; margin-bottom: 2rem;">
+        <img src="{{ page.logo | relative_url }}" alt="{{ page.title }}" style="max-width: 300px; height: auto;">
+      </div>
+      {% endif %}
+      
+      <div class="sponsor-content">
+        {{ content }}
+      </div>
+      
+      {% if page.website %}
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="{{ page.website }}" class="btn btn-primary" target="_blank" rel="noopener">Visit {{ page.title }}</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</article>
