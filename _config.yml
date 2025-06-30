@@ -10,7 +10,7 @@ description: >-
   Official website of Footscray Rugby Club - Melbourne's premier community rugby club.
   Join us for rugby, friendship, and tradition in the heart of the western suburbs.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://YOUR-NGROK-ID.ngrok.io" # Replace with your ngrok URL
+url: "https://davistui.github.io/footscrayrugby" # GitHub Pages URL
 twitter_username: footscrayrugby
 github_username:  footscrayrugby
 
