@@ -146,14 +146,14 @@ const fixturesData = {
     { date: "2025-08-09", opponent: "Power House", venue: "Home - Footscray Rugby Club 1", time: "1:15 PM", special: "", grade: "Fourth Grade" }
   ],
   colts: [
-    { date: "2025-07-05", opponent: "Power House", venue: "Away - Power House Rugby Club (Albert Park)", time: "TBD", special: "", grade: "Colts" },
+    { date: "2025-07-05", opponent: "Power House", venue: "Away - Power House Rugby Club (Albert Park)", time: "12:00 PM", special: "", grade: "Colts" },
     { date: "2025-07-12", opponent: "TBD", venue: "TBD", time: "TBD", special: "NAIDOC Round", grade: "Colts" },
     { date: "2025-07-19", opponent: "TBD", venue: "TBD", time: "TBD", special: "", grade: "Colts" },
     { date: "2025-08-02", opponent: "TBD", venue: "TBD", time: "TBD", special: "", grade: "Colts" },
     { date: "2025-08-09", opponent: "TBD", venue: "TBD", time: "TBD", special: "", grade: "Colts" }
   ],
   womens: [
-    { date: "2025-07-05", opponent: "Power House", venue: "Away - Power House Rugby Club (Albert Park) 2", time: "3:15 PM", special: "", grade: "Women's Team" },
+    { date: "2025-07-05", opponent: "Power House", venue: "Away - Power House Rugby Club (Albert Park) 2", time: "1:30 PM", special: "", grade: "Women's Team" },
     { date: "2025-07-12", opponent: "Western Districts", venue: "Home - Footscray Rugby Club 2", time: "1:30 PM", special: "NAIDOC Round", grade: "Women's Team" },
     { date: "2025-07-19", opponent: "Melbourne University / Melbourne Unicorns", venue: "Home - Footscray Rugby Club 2", time: "1:30 PM", special: "", grade: "Women's Team" },
     { date: "2025-08-02", opponent: "TBD", venue: "TBD", time: "TBD", special: "", grade: "Women's Team" },
