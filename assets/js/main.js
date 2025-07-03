@@ -174,8 +174,21 @@ function initCountdown() {
     
     // Find the next upcoming first grade fixture
     for (const fixture of firstGradeFixtures) {
-      const fixtureDate = new Date(fixture.date + ' ' + fixture.time).getTime();
-      if (fixtureDate > now) {
+      // More robust date parsing for mobile compatibility
+      let fixtureDate;
+      try {
+        // Try parsing with time first
+        fixtureDate = new Date(fixture.date + ' ' + fixture.time);
+        // If time is TBD, just use the date
+        if (fixture.time === 'TBD') {
+          fixtureDate = new Date(fixture.date);
+        }
+      } catch (e) {
+        // Fallback to just the date
+        fixtureDate = new Date(fixture.date);
+      }
+      
+      if (fixtureDate.getTime() > now) {
         nextFixture = fixture;
         break;
       }
@@ -199,12 +212,24 @@ function initCountdown() {
       buyTicketsBtn.href = '/fixtures';
       buyTicketsBtn.textContent = 'View Fixtures';
       
-      // Start countdown using the first grade fixture time
-      const fixtureDate = new Date(nextFixture.date + ' ' + nextFixture.time).getTime();
+      // Start countdown using the first grade fixture time - mobile compatible
+      let fixtureDate;
+      try {
+        // Try parsing with time first
+        fixtureDate = new Date(nextFixture.date + ' ' + nextFixture.time);
+        // If time is TBD, just use the date
+        if (nextFixture.time === 'TBD') {
+          fixtureDate = new Date(nextFixture.date);
+        }
+      } catch (e) {
+        // Fallback to just the date
+        fixtureDate = new Date(nextFixture.date);
+      }
+      const fixtureTime = fixtureDate.getTime();
       
-      const countdownInterval = setInterval(function() {
-        const now = new Date().getTime();
-        const distance = fixtureDate - now;
+              const countdownInterval = setInterval(function() {
+          const now = new Date().getTime();
+          const distance = fixtureTime - now;
         
         if (distance < 0) {
           clearInterval(countdownInterval);
@@ -244,6 +269,7 @@ function initCountdown() {
     }
   } catch (error) {
     console.error('Error loading fixtures:', error);
+    console.error('Error details:', error.message);
     // Fallback to static countdown for demo
     startDemoCountdown();
   }
@@ -450,9 +476,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-  initCountdown();
-  loadFixtures();
-  initHeroCarousel();
+  // Add a small delay for mobile devices to ensure everything is ready
+  setTimeout(function() {
+    initCountdown();
+    loadFixtures();
+    initHeroCarousel();
+  }, 100);
 });
 
 // Hero Background Carousel
