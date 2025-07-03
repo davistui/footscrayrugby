@@ -21,11 +21,10 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
-  - jekyll-paginate
 
-# Pagination
-paginate: 6
-paginate_path: "/news/page:num/"
+# Pagination - removed for GitHub Pages compatibility
+# paginate: 6
+# paginate_path: "/news/page:num/"
 
 # Collections
 collections:
