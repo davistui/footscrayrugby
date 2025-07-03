@@ -3,12 +3,6 @@ source "https://rubygems.org"
 # Use GitHub Pages gem for compatibility
 gem "github-pages", group: :jekyll_plugins
 
-# Additional gems for development
-gem "webrick", "~> 1.7"
-gem "csv"
-gem "logger"
-gem "base64"
-
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
   gem "jekyll-sitemap"

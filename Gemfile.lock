@@ -302,18 +302,13 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  base64
-  csv
   github-pages
   jekyll-feed (~> 0.12)
-  jekyll-paginate
   jekyll-seo-tag
   jekyll-sitemap
-  logger
   tzinfo (>= 1, < 3)
   tzinfo-data
   wdm (~> 0.1.1)
-  webrick (~> 1.7)
 
 BUNDLED WITH
    2.6.8
