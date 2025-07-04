@@ -180,39 +180,8 @@ title: Fixtures & Results
 </div>
 
 <script>
-// Team logo mapping
-const teamLogoMap = {
-  'harlequins': '/assets/images/club logos/harlequins.webp',
-  'box hill': '/assets/images/club logos/boxhill.webp',
-  'endeavour hills': '/assets/images/club logos/endeavourhills.webp',
-  'power house': '/assets/images/club logos/powerhouse.webp',
-  'moorabbin': '/assets/images/club logos/rams.webp',
-  'kiwi hawthorn': '/assets/images/club logos/kiwihawthorn.webp',
-  'melbourne unicorns': '/assets/images/club logos/unicorns.webp',
-  'melbourne university': '/assets/images/club logos/melbuni.webp',
-  'western districts': '/assets/images/club logos/westerndistrict.webp',
-  'southern districts': '/assets/images/club logos/southerndistricts.webp',
-  'shepparton': '/assets/images/club logos/shepparton.webp',
-  'brimbank': '/assets/images/club logos/brimbank.webp',
-  'footscray': '/assets/images/club logos/doggies.webp'
-};
-
-// Function to get team logo
-function getTeamLogo(teamName) {
-  // Convert to lowercase and remove grade suffixes
-  const cleanName = teamName.toLowerCase()
-    .replace(/\s*(1st xv|2nd xv|3rd grade|4th grade|championship|colts|womens|women's team)$/i, '')
-    .replace(/\s*\/.*$/, '') // Remove anything after a slash
-    .trim();
-  
-  // Check if we have a logo for this team
-  if (teamLogoMap[cleanName]) {
-    return teamLogoMap[cleanName];
-  }
-  
-  // Fallback to placeholder
-  return '/assets/images/logos/opponent-placeholder.svg';
-}
+// Import team logo function from main.js - reuse the existing one
+// (getTeamLogo function is already defined in main.js)
 
 // Fixtures data from fixtures_results_table.md
 const fixturesData = {
@@ -367,8 +336,8 @@ function createFixtureCard(fixture) {
   // Determine home and away teams
   const homeTeam = isHome ? 'Footscray' : fixture.opponent;
   const awayTeam = isHome ? fixture.opponent : 'Footscray';
-  const homeTeamLogo = isHome ? getTeamLogo('footscray') : getTeamLogo(fixture.opponent);
-  const awayTeamLogo = isHome ? getTeamLogo(fixture.opponent) : getTeamLogo('footscray');
+  const homeTeamLogo = isHome ? (window.getTeamLogo ? window.getTeamLogo('footscray') : '/assets/images/club logos/doggies.webp') : (window.getTeamLogo ? window.getTeamLogo(fixture.opponent) : '/assets/images/logos/opponent-placeholder.svg');
+  const awayTeamLogo = isHome ? (window.getTeamLogo ? window.getTeamLogo(fixture.opponent) : '/assets/images/logos/opponent-placeholder.svg') : (window.getTeamLogo ? window.getTeamLogo('footscray') : '/assets/images/club logos/doggies.webp');
   
   fixtureCard.innerHTML = `
     <div class="fixture-date-top">${formattedDate}</div>
@@ -421,8 +390,8 @@ function createResultCard(result) {
   // Determine home and away teams and scores
   const homeTeam = isHome ? 'Footscray' : result.opponent;
   const awayTeam = isHome ? result.opponent : 'Footscray';
-  const homeTeamLogo = isHome ? getTeamLogo('footscray') : getTeamLogo(result.opponent);
-  const awayTeamLogo = isHome ? getTeamLogo(result.opponent) : getTeamLogo('footscray');
+  const homeTeamLogo = isHome ? (window.getTeamLogo ? window.getTeamLogo('footscray') : '/assets/images/club logos/doggies.webp') : (window.getTeamLogo ? window.getTeamLogo(result.opponent) : '/assets/images/logos/opponent-placeholder.svg');
+  const awayTeamLogo = isHome ? (window.getTeamLogo ? window.getTeamLogo(result.opponent) : '/assets/images/logos/opponent-placeholder.svg') : (window.getTeamLogo ? window.getTeamLogo('footscray') : '/assets/images/club logos/doggies.webp');
   const homeScore = isHome ? ourScore : theirScore;
   const awayScore = isHome ? theirScore : ourScore;
   const venueType = isHome ? 'Home' : 'Away';
@@ -483,6 +452,10 @@ function loadFixtures() {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+  // Reinitialize mobile menu for this page
+  if (typeof initMobileMenu === 'function') {
+    initMobileMenu();
+  }
   loadFixtures();
 });
 </script>

@@ -810,6 +810,8 @@ body {
   .navbar-toggle {
     display: flex;
     z-index: 1001;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
   }
   
   .cart-container {
@@ -829,6 +831,7 @@ body {
     padding: var(--spacing-xxl) var(--spacing-lg);
     overflow-y: auto;
     z-index: 1000;
+    -webkit-overflow-scrolling: touch;
   }
   
   .navbar-menu.active {

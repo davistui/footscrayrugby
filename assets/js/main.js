@@ -32,47 +32,58 @@ function getTeamLogo(teamName) {
   return '/assets/images/logos/opponent-placeholder.svg';
 }
 
-// Mobile Menu Toggle
-document.addEventListener('DOMContentLoaded', function() {
+// Make getTeamLogo globally available
+window.getTeamLogo = getTeamLogo;
+
+// Mobile Menu Toggle - Improved for all pages
+function initMobileMenu() {
   const navbarToggle = document.getElementById('navbarToggle');
   const navbarMenu = document.getElementById('navbarMenu');
   
-  // Create mobile menu overlay
-  const overlay = document.createElement('div');
-  overlay.className = 'mobile-menu-overlay';
-  overlay.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-  `;
-  document.body.appendChild(overlay);
+  if (!navbarToggle || !navbarMenu) {
+    console.log('Mobile menu elements not found');
+    return;
+  }
+
+  // Create mobile menu overlay if it doesn't exist
+  let overlay = document.querySelector('.mobile-menu-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'mobile-menu-overlay';
+    overlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    `;
+    document.body.appendChild(overlay);
+  }
   
-  if (navbarToggle && navbarMenu) {
-    function toggleMenu() {
-      const isActive = navbarMenu.classList.contains('active');
-      navbarMenu.classList.toggle('active');
-      
-      if (!isActive) {
-        // Opening menu
-        overlay.style.opacity = '1';
-        overlay.style.visibility = 'visible';
-        document.body.style.overflow = 'hidden';
-      } else {
-        // Closing menu
-        overlay.style.opacity = '0';
-        overlay.style.visibility = 'hidden';
-        document.body.style.overflow = '';
-      }
-      
-      // Animate hamburger menu
-      const spans = navbarToggle.querySelectorAll('span');
+  function toggleMenu() {
+    const isActive = navbarMenu.classList.contains('active');
+    navbarMenu.classList.toggle('active');
+    
+    if (!isActive) {
+      // Opening menu
+      overlay.style.opacity = '1';
+      overlay.style.visibility = 'visible';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Closing menu
+      overlay.style.opacity = '0';
+      overlay.style.visibility = 'hidden';
+      document.body.style.overflow = '';
+    }
+    
+    // Animate hamburger menu
+    const spans = navbarToggle.querySelectorAll('span');
+    if (spans.length >= 3) {
       if (navbarMenu.classList.contains('active')) {
         spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
         spans[1].style.opacity = '0';
@@ -83,33 +94,45 @@ document.addEventListener('DOMContentLoaded', function() {
         spans[2].style.transform = 'none';
       }
     }
-    
-    navbarToggle.addEventListener('click', toggleMenu);
-    
-    // Close menu when clicking overlay
-    overlay.addEventListener('click', function() {
+  }
+  
+  // Remove existing event listeners to prevent duplicates
+  navbarToggle.removeEventListener('click', toggleMenu);
+  navbarToggle.addEventListener('click', toggleMenu);
+  
+  // Close menu when clicking overlay
+  overlay.removeEventListener('click', function() {
+    if (navbarMenu.classList.contains('active')) {
+      toggleMenu();
+    }
+  });
+  overlay.addEventListener('click', function() {
+    if (navbarMenu.classList.contains('active')) {
+      toggleMenu();
+    }
+  });
+  
+  // Close menu when clicking a nav link
+  const navLinks = navbarMenu.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
       if (navbarMenu.classList.contains('active')) {
         toggleMenu();
       }
     });
-    
-    // Close menu when clicking a nav link
-    const navLinks = navbarMenu.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        if (navbarMenu.classList.contains('active')) {
-          toggleMenu();
-        }
-      });
-    });
-    
-    // Close menu on escape key
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape' && navbarMenu.classList.contains('active')) {
-        toggleMenu();
-      }
-    });
-  }
+  });
+  
+  // Close menu on escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && navbarMenu.classList.contains('active')) {
+      toggleMenu();
+    }
+  });
+}
+
+// Initialize mobile menu on DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+  initMobileMenu();
 });
 
 // Fixtures data from fixtures_results_table.md
@@ -161,6 +184,35 @@ const fixturesData = {
   ]
 };
 
+// Enhanced date parsing for better mobile compatibility
+function parseFixtureDateTime(dateString, timeString) {
+  try {
+    // Handle TBD time
+    if (timeString === 'TBD' || !timeString) {
+      return new Date(dateString + 'T12:00:00');
+    }
+    
+    // Convert 12-hour time to 24-hour for better parsing
+    let time24 = timeString;
+    if (timeString.includes('PM') && !timeString.startsWith('12:')) {
+      const [time, period] = timeString.split(' ');
+      const [hours, minutes] = time.split(':');
+      time24 = (parseInt(hours) + 12) + ':' + minutes;
+    } else if (timeString.includes('AM') && timeString.startsWith('12:')) {
+      time24 = timeString.replace('12:', '00:').replace(' AM', '');
+    } else {
+      time24 = timeString.replace(/ (AM|PM)/g, '');
+    }
+    
+    // Create ISO string for better cross-browser compatibility
+    const isoString = dateString + 'T' + time24.padStart(5, '0') + ':00';
+    return new Date(isoString);
+  } catch (e) {
+    console.warn('Date parsing error:', e);
+    return new Date(dateString + 'T12:00:00');
+  }
+}
+
 // Countdown Timer
 function initCountdown() {
   const countdownElement = document.getElementById('matchCountdown');
@@ -174,19 +226,7 @@ function initCountdown() {
     
     // Find the next upcoming first grade fixture
     for (const fixture of firstGradeFixtures) {
-      // More robust date parsing for mobile compatibility
-      let fixtureDate;
-      try {
-        // Try parsing with time first
-        fixtureDate = new Date(fixture.date + ' ' + fixture.time);
-        // If time is TBD, just use the date
-        if (fixture.time === 'TBD') {
-          fixtureDate = new Date(fixture.date);
-        }
-      } catch (e) {
-        // Fallback to just the date
-        fixtureDate = new Date(fixture.date);
-      }
+      const fixtureDate = parseFixtureDateTime(fixture.date, fixture.time);
       
       if (fixtureDate.getTime() > now) {
         nextFixture = fixture;
@@ -212,19 +252,8 @@ function initCountdown() {
       buyTicketsBtn.href = '/fixtures';
       buyTicketsBtn.textContent = 'View Fixtures';
       
-      // Start countdown using the first grade fixture time - mobile compatible
-      let fixtureDate;
-      try {
-        // Try parsing with time first
-        fixtureDate = new Date(nextFixture.date + ' ' + nextFixture.time);
-        // If time is TBD, just use the date
-        if (nextFixture.time === 'TBD') {
-          fixtureDate = new Date(nextFixture.date);
-        }
-      } catch (e) {
-        // Fallback to just the date
-        fixtureDate = new Date(nextFixture.date);
-      }
+      // Start countdown using improved date parsing
+      const fixtureDate = parseFixtureDateTime(nextFixture.date, nextFixture.time);
       const fixtureTime = fixtureDate.getTime();
       
               const countdownInterval = setInterval(function() {
