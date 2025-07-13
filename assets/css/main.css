@@ -857,7 +857,7 @@ body {
     visibility: visible;
     transform: none;
     box-shadow: none;
-    padding-left: var(--spacing-lg);
+    padding-left: 0;
     margin-top: var(--spacing-sm);
   }
   
@@ -986,18 +986,27 @@ body {
 
 /* Fixtures Grid */
 .fixtures-grid {
-  display: grid;
+  display: block;
   gap: var(--spacing-md);
   max-width: 800px;
   margin: 0 auto;
+  min-height: 200px;
+}
+
+.no-fixtures {
+  text-align: center;
+  color: var(--gray-600);
+  font-style: italic;
+  padding: var(--spacing-xl);
 }
 
 /* Fixtures Carousel for Home Page */
 .fixtures-carousel-container {
   position: relative;
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto;
   overflow: hidden;
+  padding: 0 var(--spacing-lg);
 }
 
 .fixtures-carousel {
@@ -1008,11 +1017,17 @@ body {
 .carousel-slide {
   min-width: 100%;
   flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 /* Use existing fixture card styles from fixtures page */
 .fixtures-carousel .fixture-card {
-  margin: 0 var(--spacing-sm);
+  margin: 0;
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Additional badge for grade on home page carousel */
@@ -1240,15 +1255,24 @@ body {
 @media (max-width: 768px) {
   .fixtures-carousel-container {
     max-width: 100%;
-    margin: 0 -var(--spacing-sm);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
   }
   
   .fixtures-carousel {
-    padding: 0 var(--spacing-sm);
+    padding: 0;
   }
   
-  .fixture-card {
-    margin: 0 var(--spacing-xs);
+  .carousel-slide {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  .fixtures-carousel .fixture-card {
+    margin: 0;
+    width: calc(100% - var(--spacing-lg));
+    max-width: 400px;
   }
   
   .fixture-teams-upcoming {
@@ -1474,9 +1498,11 @@ body {
 }
 
 .post-image img {
+  max-width: 600px;
   width: 100%;
   height: auto;
   display: block;
+  margin: 0 auto;
 }
 
 .post-content {
@@ -2255,11 +2281,20 @@ table tr:last-child td {
   }
   
   .fixtures-carousel-container {
-    margin: 0 -var(--spacing-xs);
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
   }
   
-  .fixture-card {
+  .carousel-slide {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  .fixtures-carousel .fixture-card {
     margin: 0;
+    width: calc(100% - var(--spacing-md));
+    max-width: 350px;
   }
   
   .btn {
@@ -2338,4 +2373,49 @@ table tr:last-child td {
 
 .checkmark {
   display: none; /* Hide the span since we're using CSS for the checkmark */
+}
+
+/* Global Responsive Fixes for All Pages */
+@media (max-width: 768px) {
+  /* Make all fixed-width grid layouts stack vertically on mobile */
+  .content-section div[style*="grid-template-columns: 1fr 300px"],
+  .content-section div[style*="grid-template-columns: 300px 1fr"],
+  .content-section div[style*="grid-template-columns: 1fr 400px"],
+  .content-section div[style*="grid-template-columns: 400px 1fr"] {
+    display: block !important;
+    gap: var(--spacing-lg) !important;
+  }
+  
+  /* Ensure images are responsive in all content sections */
+  .content-section div[style*="text-align: center"] img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  /* Fix committee page president card layout */
+  .president-card {
+    grid-template-columns: 1fr !important;
+    gap: var(--spacing-lg) !important;
+  }
+  
+  .president-image {
+    height: 300px !important;
+  }
+  
+  /* Make sponsor logos responsive */
+  .sponsor-logo {
+    max-width: 200px !important;
+  }
+  
+  /* Responsive iframes for maps */
+  iframe[src*="google.com/maps"] {
+    height: 250px !important;
+  }
+  
+  /* Responsive social media icons */
+  .social-icon {
+    width: 40px !important;
+    height: 40px !important;
+  }
 }

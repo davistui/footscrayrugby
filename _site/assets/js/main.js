@@ -12,67 +12,110 @@ const teamLogoMap = {
   'southern districts': '/assets/images/club logos/southerndistricts.webp',
   'shepparton': '/assets/images/club logos/shepparton.webp',
   'brimbank': '/assets/images/club logos/brimbank.webp',
-  'footscray': '/assets/images/club logos/doggies.webp'
+  'footscray': '/assets/images/club logos/doggies.webp',
+  // Alternate name variations
+  'rams': '/assets/images/club logos/rams.webp',
+  'powerhouse': '/assets/images/club logos/powerhouse.webp',
+  'westerndistricts': '/assets/images/club logos/westerndistrict.webp'
 };
 
 // Function to get team logo
 function getTeamLogo(teamName) {
   // Convert to lowercase and remove grade suffixes
-  const cleanName = teamName.toLowerCase()
-    .replace(/\s*(1st xv|2nd xv|3rd grade|4th grade|championship|colts|womens|women's team)$/i, '')
+  let cleanName = teamName.toLowerCase()
+    .replace(/\s*(1st xv|2nd xv|3rd grade|4th grade|championship|colts|womens|women's team|women)$/i, '')
     .replace(/\s*\/.*$/, '') // Remove anything after a slash
     .trim();
   
-  // Check if we have a logo for this team
+  // Handle special cases first
+  const specialCases = {
+    'melbourne university / melbourne unicorns': 'melbourne university',
+    'bye': '/assets/images/logos/opponent-placeholder.svg',
+    'tbd': '/assets/images/logos/opponent-placeholder.svg'
+  };
+  
+  if (specialCases[cleanName]) {
+    if (specialCases[cleanName].startsWith('/assets/')) {
+      return specialCases[cleanName];
+    }
+    cleanName = specialCases[cleanName];
+  }
+  
+  // Check direct mapping
   if (teamLogoMap[cleanName]) {
     return teamLogoMap[cleanName];
+  }
+  
+  // Try common variations for teams that might have slightly different names
+  const variations = [
+    cleanName.replace(/\s+/g, ''), // Remove all spaces
+    cleanName.replace(/\s+/g, ' '), // Normalize spaces
+    cleanName.replace(/\s*rugby\s*club\s*/i, '').trim(), // Remove "rugby club"
+    cleanName.replace(/\s*fc\s*/i, '').trim() // Remove "FC"
+  ];
+  
+  for (const variation of variations) {
+    if (teamLogoMap[variation]) {
+      return teamLogoMap[variation];
+    }
   }
   
   // Fallback to placeholder
   return '/assets/images/logos/opponent-placeholder.svg';
 }
 
-// Mobile Menu Toggle
-document.addEventListener('DOMContentLoaded', function() {
+// Make getTeamLogo globally available
+window.getTeamLogo = getTeamLogo;
+
+// Mobile Menu Toggle - Improved for all pages
+function initMobileMenu() {
   const navbarToggle = document.getElementById('navbarToggle');
   const navbarMenu = document.getElementById('navbarMenu');
   
-  // Create mobile menu overlay
-  const overlay = document.createElement('div');
-  overlay.className = 'mobile-menu-overlay';
-  overlay.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-  `;
-  document.body.appendChild(overlay);
+  if (!navbarToggle || !navbarMenu) {
+    console.log('Mobile menu elements not found');
+    return;
+  }
+
+  // Create mobile menu overlay if it doesn't exist
+  let overlay = document.querySelector('.mobile-menu-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'mobile-menu-overlay';
+    overlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    `;
+    document.body.appendChild(overlay);
+  }
   
-  if (navbarToggle && navbarMenu) {
-    function toggleMenu() {
-      const isActive = navbarMenu.classList.contains('active');
-      navbarMenu.classList.toggle('active');
-      
-      if (!isActive) {
-        // Opening menu
-        overlay.style.opacity = '1';
-        overlay.style.visibility = 'visible';
-        document.body.style.overflow = 'hidden';
-      } else {
-        // Closing menu
-        overlay.style.opacity = '0';
-        overlay.style.visibility = 'hidden';
-        document.body.style.overflow = '';
-      }
-      
-      // Animate hamburger menu
-      const spans = navbarToggle.querySelectorAll('span');
+  function toggleMenu() {
+    const isActive = navbarMenu.classList.contains('active');
+    navbarMenu.classList.toggle('active');
+    
+    if (!isActive) {
+      // Opening menu
+      overlay.style.opacity = '1';
+      overlay.style.visibility = 'visible';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Closing menu
+      overlay.style.opacity = '0';
+      overlay.style.visibility = 'hidden';
+      document.body.style.overflow = '';
+    }
+    
+    // Animate hamburger menu
+    const spans = navbarToggle.querySelectorAll('span');
+    if (spans.length >= 3) {
       if (navbarMenu.classList.contains('active')) {
         spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
         spans[1].style.opacity = '0';
@@ -83,83 +126,113 @@ document.addEventListener('DOMContentLoaded', function() {
         spans[2].style.transform = 'none';
       }
     }
-    
-    navbarToggle.addEventListener('click', toggleMenu);
-    
-    // Close menu when clicking overlay
-    overlay.addEventListener('click', function() {
+  }
+  
+  // Remove existing event listeners to prevent duplicates
+  navbarToggle.removeEventListener('click', toggleMenu);
+  navbarToggle.addEventListener('click', toggleMenu);
+  
+  // Close menu when clicking overlay
+  overlay.removeEventListener('click', function() {
+    if (navbarMenu.classList.contains('active')) {
+      toggleMenu();
+    }
+  });
+  overlay.addEventListener('click', function() {
+    if (navbarMenu.classList.contains('active')) {
+      toggleMenu();
+    }
+  });
+  
+  // Close menu when clicking a nav link
+  const navLinks = navbarMenu.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
       if (navbarMenu.classList.contains('active')) {
         toggleMenu();
       }
     });
-    
-    // Close menu when clicking a nav link
-    const navLinks = navbarMenu.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        if (navbarMenu.classList.contains('active')) {
-          toggleMenu();
-        }
-      });
-    });
-    
-    // Close menu on escape key
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape' && navbarMenu.classList.contains('active')) {
-        toggleMenu();
-      }
-    });
-  }
+  });
+  
+  // Close menu on escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && navbarMenu.classList.contains('active')) {
+      toggleMenu();
+    }
+  });
+}
+
+// Initialize mobile menu on DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+  initMobileMenu();
 });
 
-// Fixtures data from fixtures_results_table.md
-const fixturesData = {
+// Home page fixtures data (simplified version for carousel)
+const homeFixturesData = {
   firstGrade: [
-    { date: "2025-07-05", opponent: "Power House", venue: "Away - Power House Rugby Club (Albert Park) 1", time: "3:15 PM", special: "", grade: "Senior Men" },
-    { date: "2025-07-12", opponent: "Moorabbin", venue: "Home - Footscray Rugby Club 1", time: "3:15 PM", special: "NAIDOC Round", grade: "Senior Men" },
     { date: "2025-07-19", opponent: "Kiwi Hawthorn", venue: "Away - Lewin Reserve", time: "3:15 PM", special: "", grade: "Senior Men" },
     { date: "2025-08-02", opponent: "Melbourne Unicorns", venue: "Away - Melbourne Rugby Club 1", time: "3:15 PM", special: "", grade: "Senior Men" },
     { date: "2025-08-09", opponent: "Melbourne University", venue: "Away - HG Smith Oval 1", time: "3:15 PM", special: "", grade: "Senior Men" },
     { date: "2025-08-16", opponent: "Harlequins", venue: "Home - Footscray Rugby Club 1", time: "3:15 PM", special: "", grade: "Senior Men" }
   ],
   secondGrade: [
-    { date: "2025-07-05", opponent: "Power House", venue: "Away - Power House Rugby Club (Albert Park) 1", time: "1:30 PM", special: "", grade: "Second Grade" },
-    { date: "2025-07-12", opponent: "Moorabbin", venue: "Home - Footscray Rugby Club 1", time: "1:30 PM", special: "NAIDOC Round", grade: "Second Grade" },
     { date: "2025-07-19", opponent: "Kiwi Hawthorn", venue: "Away - Lewin Reserve", time: "1:30 PM", special: "", grade: "Second Grade" },
     { date: "2025-08-02", opponent: "Melbourne Unicorns", venue: "Away - Melbourne Rugby Club 1", time: "1:30 PM", special: "", grade: "Second Grade" },
     { date: "2025-08-09", opponent: "Melbourne University", venue: "Away - HG Smith Oval 1", time: "1:30 PM", special: "", grade: "Second Grade" },
     { date: "2025-08-16", opponent: "Harlequins", venue: "Home - Footscray Rugby Club 1", time: "1:30 PM", special: "", grade: "Second Grade" }
   ],
   thirdGrade: [
-    { date: "2025-07-05", opponent: "Power House", venue: "Away - Power House Rugby Club (Albert Park) 2", time: "12:00 PM", special: "", grade: "Third Grade" },
-    { date: "2025-07-12", opponent: "Moorabbin", venue: "Home - Footscray Rugby Club 2", time: "12:00 PM", special: "NAIDOC Round", grade: "Third Grade" },
     { date: "2025-07-19", opponent: "Kiwi Hawthorn", venue: "Away - Lewin Reserve", time: "12:00 PM", special: "", grade: "Third Grade" },
     { date: "2025-08-02", opponent: "Melbourne Unicorns", venue: "Away - Melbourne Rugby Club 2", time: "12:00 PM", special: "", grade: "Third Grade" },
     { date: "2025-08-09", opponent: "Melbourne University", venue: "Away - HG Smith Oval 2", time: "12:00 PM", special: "", grade: "Third Grade" },
     { date: "2025-08-16", opponent: "Harlequins", venue: "Home - Footscray Rugby Club 2", time: "12:00 PM", special: "", grade: "Third Grade" }
   ],
   fourthGrade: [
-    { date: "2025-07-05", opponent: "Power House", venue: "Away - Power House Rugby Club (Albert Park)", time: "3:15 PM", special: "", grade: "Fourth Grade" },
-    { date: "2025-07-12", opponent: "Bye", venue: "Home - Footscray Rugby Club", time: "1:15 PM", special: "NAIDOC Round", grade: "Fourth Grade" },
     { date: "2025-07-19", opponent: "Southern Districts", venue: "Away - Geelong Rugby Club 1", time: "1:15 PM", special: "", grade: "Fourth Grade" },
     { date: "2025-08-02", opponent: "Shepparton", venue: "Away - VE Vibert Reserve 1", time: "1:15 PM", special: "", grade: "Fourth Grade" },
     { date: "2025-08-09", opponent: "Power House", venue: "Home - Footscray Rugby Club 1", time: "1:15 PM", special: "", grade: "Fourth Grade" }
   ],
   colts: [
-    { date: "2025-07-05", opponent: "Power House", venue: "Away - Power House Rugby Club (Albert Park)", time: "12:00 PM", special: "", grade: "Colts" },
-    { date: "2025-07-12", opponent: "TBD", venue: "TBD", time: "TBD", special: "NAIDOC Round", grade: "Colts" },
     { date: "2025-07-19", opponent: "TBD", venue: "TBD", time: "TBD", special: "", grade: "Colts" },
     { date: "2025-08-02", opponent: "TBD", venue: "TBD", time: "TBD", special: "", grade: "Colts" },
     { date: "2025-08-09", opponent: "TBD", venue: "TBD", time: "TBD", special: "", grade: "Colts" }
   ],
   womens: [
-    { date: "2025-07-05", opponent: "Power House", venue: "Away - Power House Rugby Club (Albert Park) 2", time: "1:30 PM", special: "", grade: "Women's Team" },
-    { date: "2025-07-12", opponent: "Western Districts", venue: "Home - Footscray Rugby Club 2", time: "1:30 PM", special: "NAIDOC Round", grade: "Women's Team" },
     { date: "2025-07-19", opponent: "Melbourne University / Melbourne Unicorns", venue: "Home - Footscray Rugby Club 2", time: "1:30 PM", special: "", grade: "Women's Team" },
     { date: "2025-08-02", opponent: "TBD", venue: "TBD", time: "TBD", special: "", grade: "Women's Team" },
-    { date: "2025-08-09", opponent: "Endeavour Hills", venue: "Away - Endeavour Hills Rugby Club 2", time: "1:30 PM", special: "", grade: "Women's Team" }
+    { date: "2025-08-09", opponent: "Endeavour Hills", venue: "Away - Endeavour Hills Rugby Club 2", time: "1:30 PM", special: "", grade: "Women's Team" },
+    { date: "2025-08-16", opponent: "TBD", venue: "TBD", time: "TBD", special: "", grade: "Women's Team" }
   ]
 };
+
+// Enhanced date parsing for better mobile compatibility
+function parseFixtureDateTime(dateString, timeString) {
+  try {
+    // Handle TBD time
+    if (timeString === 'TBD' || !timeString) {
+      return new Date(dateString + 'T12:00:00');
+    }
+    
+    // Convert 12-hour time to 24-hour for better parsing
+    let time24 = timeString;
+    if (timeString.includes('PM') && !timeString.startsWith('12:')) {
+      const [time, period] = timeString.split(' ');
+      const [hours, minutes] = time.split(':');
+      time24 = (parseInt(hours) + 12) + ':' + minutes;
+    } else if (timeString.includes('AM') && timeString.startsWith('12:')) {
+      time24 = timeString.replace('12:', '00:').replace(' AM', '');
+    } else {
+      time24 = timeString.replace(/ (AM|PM)/g, '');
+    }
+    
+    // Create ISO string for better cross-browser compatibility
+    const isoString = dateString + 'T' + time24.padStart(5, '0') + ':00';
+    return new Date(isoString);
+  } catch (e) {
+    console.warn('Date parsing error:', e);
+    return new Date(dateString + 'T12:00:00');
+  }
+}
 
 // Countdown Timer
 function initCountdown() {
@@ -167,26 +240,17 @@ function initCountdown() {
   if (!countdownElement) return;
   
   try {
+    // Use homeFixturesData for home page, fixturesData for fixtures page
+    const dataSource = typeof fixturesData !== 'undefined' ? fixturesData : homeFixturesData;
+    
     // Get only first grade fixtures
-    const firstGradeFixtures = fixturesData.firstGrade;
+    const firstGradeFixtures = dataSource.firstGrade || [];
     const now = new Date().getTime();
     let nextFixture = null;
     
     // Find the next upcoming first grade fixture
     for (const fixture of firstGradeFixtures) {
-      // More robust date parsing for mobile compatibility
-      let fixtureDate;
-      try {
-        // Try parsing with time first
-        fixtureDate = new Date(fixture.date + ' ' + fixture.time);
-        // If time is TBD, just use the date
-        if (fixture.time === 'TBD') {
-          fixtureDate = new Date(fixture.date);
-        }
-      } catch (e) {
-        // Fallback to just the date
-        fixtureDate = new Date(fixture.date);
-      }
+      const fixtureDate = parseFixtureDateTime(fixture.date, fixture.time);
       
       if (fixtureDate.getTime() > now) {
         nextFixture = fixture;
@@ -212,19 +276,8 @@ function initCountdown() {
       buyTicketsBtn.href = '/fixtures';
       buyTicketsBtn.textContent = 'View Fixtures';
       
-      // Start countdown using the first grade fixture time - mobile compatible
-      let fixtureDate;
-      try {
-        // Try parsing with time first
-        fixtureDate = new Date(nextFixture.date + ' ' + nextFixture.time);
-        // If time is TBD, just use the date
-        if (nextFixture.time === 'TBD') {
-          fixtureDate = new Date(nextFixture.date);
-        }
-      } catch (e) {
-        // Fallback to just the date
-        fixtureDate = new Date(nextFixture.date);
-      }
+      // Start countdown using improved date parsing
+      const fixtureDate = parseFixtureDateTime(nextFixture.date, nextFixture.time);
       const fixtureTime = fixtureDate.getTime();
       
               const countdownInterval = setInterval(function() {
@@ -240,13 +293,11 @@ function initCountdown() {
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
         // Get countdown elements
         const daysElement = document.getElementById('days');
         const hoursElement = document.getElementById('hours');
         const minutesElement = document.getElementById('minutes');
-        const secondsElement = document.getElementById('seconds');
         const daysContainer = daysElement.parentElement;
         
         // Show/hide days based on time remaining
@@ -261,7 +312,6 @@ function initCountdown() {
         
         hoursElement.textContent = String(hours).padStart(2, '0');
         minutesElement.textContent = String(minutes).padStart(2, '0');
-        secondsElement.textContent = String(seconds).padStart(2, '0');
       }, 1000);
     } else {
       // No upcoming fixtures
@@ -298,31 +348,53 @@ function startDemoCountdown() {
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
     document.getElementById('days').textContent = String(days).padStart(2, '0');
     document.getElementById('hours').textContent = String(hours).padStart(2, '0');
     document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
   }, 1000);
 }
 
-// Load fixtures carousel for homepage
+// Load fixtures carousel for homepage ONLY
 function loadFixtures() {
+  console.log('loadFixtures called on:', window.location.pathname);
+  
+  // Only run on home page - check if we're on fixtures page
+  if (window.location.pathname.includes('/fixtures')) {
+    console.log('Skipping - on fixtures page');
+    return;
+  }
+  
+  // Look specifically for the home page fixtures grid
   const fixturesGrid = document.getElementById('fixturesGrid');
-  if (!fixturesGrid) return;
+  console.log('fixturesGrid found:', !!fixturesGrid);
+  if (!fixturesGrid) {
+    console.log('No fixturesGrid element - not on home page');
+    return;
+  }
+  
+  console.log('Loading home page fixtures carousel...');
   
   try {
+    // Use homeFixturesData for home page, fixturesData for fixtures page
+    const dataSource = typeof fixturesData !== 'undefined' ? fixturesData : homeFixturesData;
+    console.log('Data source:', dataSource ? 'found' : 'not found');
+    console.log('Using data source:', typeof fixturesData !== 'undefined' ? 'fixturesData' : 'homeFixturesData');
+    
     const now = new Date();
-    const gradeNames = ['firstGrade', 'secondGrade', 'thirdGrade', 'fourthGrade', 'colts', 'womens'];
+    const gradeNames = ['firstGrade', 'secondGrade', 'thirdGrade', 'fourthGrade', 'womens'];
     const carouselFixtures = [];
     
     // Get next upcoming fixture from each grade
     gradeNames.forEach(gradeName => {
-      const gradeFixtures = fixturesData[gradeName];
-      const nextFixture = gradeFixtures.find(fixture => new Date(fixture.date) >= now);
-      if (nextFixture) {
-        carouselFixtures.push(nextFixture);
+      const gradeFixtures = dataSource[gradeName];
+      if (gradeFixtures) {
+        // Handle both array format (home page) and object format (fixtures page)
+        const fixtures = Array.isArray(gradeFixtures) ? gradeFixtures : gradeFixtures.upcoming || [];
+        const nextFixture = fixtures.find(fixture => new Date(fixture.date) >= now);
+        if (nextFixture) {
+          carouselFixtures.push(nextFixture);
+        }
       }
     });
     
@@ -332,7 +404,7 @@ function loadFixtures() {
     }
     
     // Create carousel container
-    fixturesGrid.innerHTML = `
+    const carouselHTML = `
       <div class="fixtures-carousel-container">
         <div class="fixtures-carousel" id="fixturesCarousel">
           ${carouselFixtures.map((fixture, index) => createCarouselCard(fixture, index)).join('')}
@@ -343,7 +415,7 @@ function loadFixtures() {
       </div>
     `;
     
-    // Initialize carousel
+    fixturesGrid.innerHTML = carouselHTML;
     initCarousel(carouselFixtures.length);
     
   } catch (error) {
