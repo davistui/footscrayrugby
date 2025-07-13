@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Club Hosts Inaugural Presidents Luncheon"
-date: 2025-06-15
+date: 2025-06-07
 categories: [events, community]
 tags: [presidents-luncheon, wallaby, matt-cockbain, first-grade, university]
 excerpt: "Footscray Rugby Club hosted its first-ever Presidents Luncheon, featuring special guest Matt Cockbain and celebrating our 1st Grade team ahead of their match against University."
