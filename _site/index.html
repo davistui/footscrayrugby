@@ -8,7 +8,10 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/images/favicon.png">
+
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Home | Footscray Rugby Club</title>
 <meta name="generator" content="Jekyll v3.10.0" />
@@ -16,14 +19,14 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Official website of Footscray Rugby Union Club - Melbourne’s premier community rugby club" />
 <meta property="og:description" content="Official website of Footscray Rugby Union Club - Melbourne’s premier community rugby club" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
+<link rel="canonical" href="https://davistui.github.io/" />
+<meta property="og:url" content="https://davistui.github.io/" />
 <meta property="og:site_name" content="Footscray Rugby Club" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Home" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Official website of Footscray Rugby Union Club - Melbourne’s premier community rugby club","headline":"Home","name":"Footscray Rugby Club","url":"http://localhost:4000/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","description":"Official website of Footscray Rugby Union Club - Melbourne’s premier community rugby club","headline":"Home","name":"Footscray Rugby Club","url":"https://davistui.github.io/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -32,9 +35,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Footscray Rugby Club" />
+  <link type="application/atom+xml" rel="alternate" href="https://davistui.github.io/feed.xml" title="Footscray Rugby Club" />
 </head>
 <body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v23.0"></script>
+
   <header class="site-header">
   <nav class="navbar">
     <div class="container">
@@ -61,20 +67,16 @@
             <a href="#" class="nav-link">About</a>
             <ul class="dropdown-menu">
               <li><a href="/about">Club History</a></li>
-              <li><a href="/about/committee">Coaches & Committee</a></li>
+              <li><a href="/about/leadership">Coaches & Committee</a></li>
+              <li><a href="/about/policies">Club Policies</a></li>
               <li><a href="/insurance">Player Insurance</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link">Teams</a>
-            <ul class="dropdown-menu">
-              <li><a href="/fixtures">Fixtures & Results</a></li>
-              <li><a href="/teams/senior-men">Senior Men</a></li>
-              <li><a href="/teams/senior-women">Senior Women</a></li>
             </ul>
           </li>
           <li class="nav-item">
             <a href="/news" class="nav-link ">News & Events</a>
+          </li>
+          <li class="nav-item">
+            <a href="/fixtures" class="nav-link ">2025 Season Recap</a>
           </li>
           <li class="nav-item">
             <a href="/shop" class="nav-link ">Shop</a>
@@ -90,7 +92,7 @@
     </div>
   </nav>
 </header>
-  
+
   <main class="main-content">
     <!-- Hero Section with Countdown -->
 <section class="hero">
@@ -111,54 +113,7 @@
   <div class="hero-content">
     <div class="container">
       <h1 class="hero-title">Footscray Rugby Union Club</h1>
-      
-      <div class="match-countdown" id="matchCountdown">
-        <h2 class="countdown-title">Next Match</h2>
-        <div class="countdown-teams">
-          <div class="countdown-team">
-            <img src="/assets/images/club logos/doggies.webp" alt="Footscray" class="countdown-logo">
-            <span class="countdown-team-name">Footscray</span>
-          </div>
-          <div class="countdown-vs">VS</div>
-          <div class="countdown-team">
-            <img id="opponentLogo" src="/assets/images/logos/opponent-placeholder.svg" alt="Opponent" class="countdown-logo">
-            <span class="countdown-team-name" id="nextOpponent">Loading...</span>
-          </div>
-        </div>
-        <div class="countdown-info">
-          <span class="venue" id="nextVenue"></span>
-        </div>
-        <div class="countdown-timer" id="countdownTimer">
-          <div class="countdown-item">
-            <span class="countdown-number" id="days">00</span>
-            <span class="countdown-label">Days</span>
-          </div>
-          <div class="countdown-item">
-            <span class="countdown-number" id="hours">00</span>
-            <span class="countdown-label">Hours</span>
-          </div>
-          <div class="countdown-item">
-            <span class="countdown-number" id="minutes">00</span>
-            <span class="countdown-label">Minutes</span>
-          </div>
-        </div>
-        <a href="/fixtures" class="btn btn-primary" id="buyTickets">View Fixtures</a>
-      </div>
-      
       <p class="hero-tagline">Pride • Passion • Community</p>
-    </div>
-  </div>
-</section>
-
-<!-- Fixtures Section -->
-<section class="section fixtures-section">
-  <div class="container">
-    <h2 class="section-title">Upcoming Fixtures</h2>
-    <div class="fixtures-grid" id="fixturesGrid">
-      <!-- Fixtures will be loaded here -->
-    </div>
-    <div class="section-footer">
-      <a href="/fixtures" class="btn btn-secondary">View All Fixtures</a>
     </div>
   </div>
 </section>
@@ -167,11 +122,39 @@
 
 
 <!-- Latest News Section -->
-<section class="section news-section">
+<section class="section news-section" style="background: white;">
   <div class="container">
     <h2 class="section-title">News</h2>
     <div class="news-grid">
       
+      
+      <article class="news-card">
+        
+        <div class="news-image">
+          <img src="/assets/images/news/rugby-7s-2025.jpg" alt="Footscray Barbarian Brewery Rugby 7's Tournament">
+        </div>
+        
+        <div class="news-content">
+          <h3 class="news-title"><a href="/news/2025/09/25/rugby-7s-tournament">Footscray Barbarian Brewery Rugby 7's Tournament</a></h3>
+          <time class="news-date">September 25, 2025</time>
+          <p class="news-excerpt">Register now for the Footscray Barbarian Brewery Rugby 7's on Saturday 11 October at Henry Turner Reserve. Prize money and automatic entry to Bendi...</p>
+          <a href="/news/2025/09/25/rugby-7s-tournament" class="read-more">Read more →</a>
+        </div>
+      </article>
+      
+      <article class="news-card">
+        
+        <div class="news-image">
+          <img src="/assets/images/news/agm-2025.png" alt="Notice of Annual General Meeting 2025">
+        </div>
+        
+        <div class="news-content">
+          <h3 class="news-title"><a href="/news/2025/09/23/agm-notice">Notice of Annual General Meeting 2025</a></h3>
+          <time class="news-date">September 23, 2025</time>
+          <p class="news-excerpt">Please save the date for the Footscray Rugby Union Club - Annual General Meeting 2025.</p>
+          <a href="/news/2025/09/23/agm-notice" class="read-more">Read more →</a>
+        </div>
+      </article>
       
       <article class="news-card">
         
@@ -187,40 +170,13 @@
         </div>
       </article>
       
-      <article class="news-card">
-        
-        <div class="news-image">
-          <img src="/assets/images/news/undefeated.jpg" alt="First Grade Completes Undefeated First Round">
-        </div>
-        
-        <div class="news-content">
-          <h3 class="news-title"><a href="/news/2025/06/16/undefeated-first-round">First Grade Completes Undefeated First Round</a></h3>
-          <time class="news-date">June 16, 2025</time>
-          <p class="news-excerpt">Footscray's First Grade team completed an undefeated first round with a thrilling 19-17 comeback victory against Harlequins, showing incredible gri...</p>
-          <a href="/news/2025/06/16/undefeated-first-round" class="read-more">Read more →</a>
-        </div>
-      </article>
-      
-      <article class="news-card">
-        
-        <div class="news-image">
-          <img src="/assets/images/news/presidentslunch.jpg" alt="Club Hosts Inaugural Presidents Luncheon">
-        </div>
-        
-        <div class="news-content">
-          <h3 class="news-title"><a href="/news/2025/06/07/presidents-luncheon">Club Hosts Inaugural Presidents Luncheon</a></h3>
-          <time class="news-date">June 07, 2025</time>
-          <p class="news-excerpt">Footscray Rugby Club hosted its first-ever Presidents Luncheon, featuring special guest Matt Cockbain and celebrating our 1st Grade team ahead of t...</p>
-          <a href="/news/2025/06/07/presidents-luncheon" class="read-more">Read more →</a>
-        </div>
-      </article>
-      
     </div>
     <div class="section-footer">
       <a href="/news" class="btn btn-secondary">View All News</a>
     </div>
   </div>
 </section>
+
 
 <!-- Merchandise Section - Hidden -->
 <!--
@@ -270,8 +226,105 @@
 </section>
 -->
 
+<!-- Stay Connected Section -->
+<section class="section stay-connected-section">
+  <div class="container">
+    <h2 class="section-title">Stay Connected</h2>
+    <div class="stay-connected-grid">
+      <!-- Newsletter Column -->
+      <div class="newsletter-column">
+        <div class="newsletter-content">
+          <h3>Join Our Newsletter</h3>
+          <p>Get exclusive updates, match results, and special offers delivered to your inbox</p>
+          <form class="newsletter-form-large" action="https://formspree.io/f/xkgbkaew" method="post">
+            <input type="email" name="email" placeholder="Enter your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <p class="newsletter-prize">Subscribe for a chance to win official merchandise!</p>
+        </div>
+      </div>
+
+      <!-- Facebook Feed Column -->
+      <div class="facebook-column">
+        <div class="facebook-feed-container">
+          <div class="fb-page" data-href="https://www.facebook.com/footscrayrugby" data-tabs="timeline" data-width="500" data-height="600" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+            <blockquote cite="https://www.facebook.com/footscrayrugby" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/footscrayrugby">Footscray Rugby Union Club</a>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.stay-connected-section {
+  background: var(--gray-50);
+}
+
+.stay-connected-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xxl);
+  align-items: stretch;
+}
+
+.newsletter-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.newsletter-column h3 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.newsletter-column p {
+  font-size: 1.125rem;
+  color: var(--gray-700);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.6;
+}
+
+.facebook-column {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.facebook-feed-container {
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 540px;
+}
+
+@media (max-width: 968px) {
+  .stay-connected-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .facebook-column {
+    justify-content: center;
+  }
+
+  .facebook-feed-container {
+    padding: var(--spacing-sm);
+  }
+
+  .facebook-feed-container .fb-page {
+    width: 100% !important;
+  }
+}
+</style>
 <!-- Sponsors Section -->
-<section class="section sponsors-section">
+<section class="section sponsors-section" style="background: white;">
   <div class="container">
     <h2 class="section-title">Partners</h2>
     <div style="text-align: center; margin-bottom: var(--spacing-xl);">
@@ -279,90 +332,70 @@
         We're proud to partner with local businesses and organizations who share our commitment to community rugby. Together, we're building something special in Melbourne's west.
       </p>
     </div>
-    <div class="sponsors-carousel-container" style="display: none;">
-      <div class="sponsors-carousel" id="sponsorsCarousel">
-        
-        
-        <div class="sponsor-card">
-          <a href="https://example.com" target="_blank" rel="noopener">
-            <img src="/assets/images/sponsors/western-suburbs-construction.png" alt="Western Suburbs Construction">
-            <h4>Western Suburbs Construction</h4>
-          </a>
-        </div>
-        
-        
-        <!-- Placeholder sponsors -->
-        <div class="sponsor-card">
-          <a href="#" target="_blank" rel="noopener">
-            <img src="/assets/images/sponsors/placeholder-1.svg" alt="Local Business Partner">
-            <h4>Local Business Partner</h4>
-          </a>
-        </div>
-        <div class="sponsor-card">
-          <a href="#" target="_blank" rel="noopener">
-            <img src="/assets/images/sponsors/placeholder-2.svg" alt="Community Supporter">
-            <h4>Community Supporter</h4>
-          </a>
-        </div>
-        <div class="sponsor-card">
-          <a href="#" target="_blank" rel="noopener">
-            <img src="/assets/images/sponsors/placeholder-3.svg" alt="Gold Sponsor">
-            <h4>Gold Sponsor</h4>
-          </a>
-        </div>
-        <div class="sponsor-card">
-          <a href="#" target="_blank" rel="noopener">
-            <img src="/assets/images/sponsors/placeholder-1.svg" alt="Silver Sponsor">
-            <h4>Silver Sponsor</h4>
-          </a>
-        </div>
-        <div class="sponsor-card">
-          <a href="#" target="_blank" rel="noopener">
-            <img src="/assets/images/sponsors/placeholder-2.svg" alt="Bronze Sponsor">
-            <h4>Bronze Sponsor</h4>
-          </a>
-        </div>
-        <!-- Duplicate cards for seamless loop -->
-        <div class="sponsor-card">
-          <a href="#" target="_blank" rel="noopener">
-            <img src="/assets/images/sponsors/placeholder-3.svg" alt="Gold Sponsor">
-            <h4>Gold Sponsor</h4>
-          </a>
-        </div>
-        <div class="sponsor-card">
-          <a href="#" target="_blank" rel="noopener">
-            <img src="/assets/images/sponsors/placeholder-1.svg" alt="Local Business Partner">
-            <h4>Local Business Partner</h4>
-          </a>
-        </div>
-        <div class="sponsor-card">
-          <a href="#" target="_blank" rel="noopener">
-            <img src="/assets/images/sponsors/placeholder-2.svg" alt="Community Supporter">
-            <h4>Community Supporter</h4>
-          </a>
-        </div>
+    <div class="sponsors-grid">
+      
+      
+      <div class="sponsor-card">
+        <a href="/sponsors#barbarian-brewing-co" rel="noopener">
+          <img src="/assets/images/sponsors/barbarian-brewing.jpg" alt="Barbarian Brewing Co">
+        </a>
       </div>
+      
+      
     </div>
     <div class="section-footer">
-      <a href="/sponsors" class="btn btn-secondary">View All Partners</a>
+      <a href="/sponsors" class="btn btn-secondary">Become a Partner</a>
     </div>
   </div>
 </section>
 
-<!-- Newsletter Section -->
-<section class="section newsletter-section">
-  <div class="container">
-    <div class="newsletter-content">
-      <h2 class="section-title">Stay Connected</h2>
-      <p>Join our newsletter for exclusive updates, match results, and special offers</p>
-      <form class="newsletter-form-large" action="https://formspree.io/f/xkgbkaew" method="post">
-        <input type="email" name="email" placeholder="Enter your email address" required>
-        <button type="submit" class="btn btn-primary">Subscribe</button>
-      </form>
-      <p class="newsletter-prize">Subscribe for a chance to win official merchandise!</p>
-    </div>
-  </div>
-</section>
+<style>
+.sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-xl);
+  margin: var(--spacing-xxl) 0;
+}
+
+.sponsor-card {
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  min-height: 150px;
+}
+
+.sponsor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.sponsor-card img {
+  max-width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .sponsor-card {
+    min-height: 120px;
+  }
+
+  .sponsor-card img {
+    max-height: 80px;
+  }
+}
+</style>
+
   </main>
   
   <footer class="site-footer">
@@ -381,8 +414,8 @@
         <h4>Quick Links</h4>
         <ul class="footer-links">
           <li><a href="/about">About Us</a></li>
-          <li><a href="/teams">Our Teams</a></li>
-          <li><a href="/fixtures">Fixtures</a></li>
+          <li><a href="/news">News & Events</a></li>
+          <li><a href="/fixtures">2025 Recap</a></li>
           <li><a href="/join">Join Us</a></li>
         </ul>
       </div>

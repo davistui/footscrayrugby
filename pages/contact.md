@@ -33,23 +33,8 @@ permalink: /contact/
     </div>
 
     <div style="background: var(--gray-50); padding: var(--spacing-xl); border-radius: var(--radius-lg); border-left: 4px solid var(--secondary-color); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-      <h4 style="color: var(--secondary-color); font-size: 1.25rem; margin-bottom: var(--spacing-md);">Director of Rugby</h4>
-      <p style="font-weight: 600; color: var(--gray-800); margin-bottom: var(--spacing-sm);">Dave Diack</p>
-      <p style="color: var(--gray-700); margin-bottom: var(--spacing-xs);">📞 <a href="tel:0431420142" style="color: var(--gray-700); text-decoration: none;">0431 420 142</a></p>
-      <p style="color: var(--gray-700);">📧 <a href="mailto:diack.david@gmail.com" style="color: var(--primary-color); text-decoration: none;">diack.david@gmail.com</a></p>
-    </div>
-
-    <div style="background: var(--gray-50); padding: var(--spacing-xl); border-radius: var(--radius-lg); border-left: 4px solid var(--primary-color); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-      <h4 style="color: var(--primary-color); font-size: 1.25rem; margin-bottom: var(--spacing-md);">Junior Rugby</h4>
-      <p style="font-weight: 600; color: var(--gray-800); margin-bottom: var(--spacing-sm);">Luke Mears</p>
-      <p style="color: var(--gray-700); margin-bottom: var(--spacing-xs);">📞 <a href="tel:0421182250" style="color: var(--gray-700); text-decoration: none;">0421 182 250</a></p>
-      <p style="color: var(--gray-700);">📧 <a href="mailto:blackoutfire2012@gmail.com" style="color: var(--primary-color); text-decoration: none;">blackoutfire2012@gmail.com</a></p>
-    </div>
-
-    <div style="background: var(--gray-50); padding: var(--spacing-xl); border-radius: var(--radius-lg); border-left: 4px solid var(--secondary-color); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-      <h4 style="color: var(--secondary-color); font-size: 1.25rem; margin-bottom: var(--spacing-md);">Rugby Coordinator</h4>
-      <p style="font-weight: 600; color: var(--gray-800); margin-bottom: var(--spacing-sm);">Darcy Fergus</p>
-      <p style="color: var(--gray-700); margin-bottom: var(--spacing-xs);">📞 <a href="tel:0480116006" style="color: var(--gray-700); text-decoration: none;">0480 116 006</a></p>
+      <h4 style="color: var(--secondary-color); font-size: 1.25rem; margin-bottom: var(--spacing-md);">Junior Rugby</h4>
+      <p style="font-weight: 600; color: var(--gray-800); margin-bottom: var(--spacing-sm);">Flo Folomu</p>
       <p style="color: var(--gray-700);">📧 <a href="mailto:footscrayrugbyunion@gmail.com" style="color: var(--primary-color); text-decoration: none;">footscrayrugbyunion@gmail.com</a></p>
     </div>
 

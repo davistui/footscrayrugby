@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Club President
-subtitle: Leadership and Vision
-permalink: /about/committee/
+title: Leadership & Coaching
+subtitle: Our Committee and Coaches
+permalink: /about/leadership/
 ---
 
 <div class="page-content">
@@ -27,10 +27,88 @@ permalink: /about/committee/
         </div>
       </div>
     </div>
+
+    <div class="coaching-section">
+      <h2>Coaching Group</h2>
+      <div class="coaching-card">
+        <div class="coaching-image">
+          <img src="/assets/images/committee/coaching-group-senior-mens.jpg" alt="Senior Men's Coaching Group">
+        </div>
+        <div class="coaching-info">
+          <h3>Senior Men's Coaching Team</h3>
+          <p>Our dedicated coaching group brings together experienced rugby minds committed to developing players and building a winning culture at Footscray Rugby Club.</p>
+          <p>Led by our Head Coaches and supported by specialist coaches across all grades, our coaching team focuses on technical excellence, tactical development, and creating an environment where every player can reach their potential.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <style>
+.president-section,
+.coaching-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) 0;
+}
+
+.coaching-section {
+  margin-top: var(--spacing-xxl);
+}
+
+.coaching-section h2 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.coaching-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.coaching-image {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.coaching-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.coaching-info {
+  padding: var(--spacing-xxl);
+  text-align: center;
+}
+
+.coaching-info h3 {
+  color: var(--primary-color);
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.coaching-info p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--gray-700);
+  margin-bottom: var(--spacing-lg);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.coaching-info p:last-child {
+  margin-bottom: 0;
+}
+
 .president-section {
   max-width: 1000px;
   margin: 0 auto;

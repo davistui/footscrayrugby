@@ -24,20 +24,16 @@
             <a href="#" class="nav-link">About</a>
             <ul class="dropdown-menu">
               <li><a href="{{ '/about' | relative_url }}">Club History</a></li>
-              <li><a href="{{ '/about/committee' | relative_url }}">Coaches & Committee</a></li>
+              <li><a href="{{ '/about/leadership' | relative_url }}">Coaches & Committee</a></li>
+              <li><a href="{{ '/about/policies' | relative_url }}">Club Policies</a></li>
               <li><a href="{{ '/insurance' | relative_url }}">Player Insurance</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link">Teams</a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ '/fixtures' | relative_url }}">Fixtures & Results</a></li>
-              <li><a href="{{ '/teams/senior-men' | relative_url }}">Senior Men</a></li>
-              <li><a href="{{ '/teams/senior-women' | relative_url }}">Senior Women</a></li>
             </ul>
           </li>
           <li class="nav-item">
             <a href="{{ '/news' | relative_url }}" class="nav-link {% if page.url contains '/news' %}active{% endif %}">News & Events</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ '/fixtures' | relative_url }}" class="nav-link {% if page.url contains '/fixtures' %}active{% endif %}">2025 Season Recap</a>
           </li>
           <li class="nav-item">
             <a href="{{ '/shop' | relative_url }}" class="nav-link {% if page.url contains '/shop' %}active{% endif %}">Shop</a>

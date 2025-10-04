@@ -8,7 +8,10 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
+
+  <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/images/favicon.png' | relative_url }}">
+
   {% seo %}
   
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
@@ -19,8 +22,11 @@
   {% feed_meta %}
 </head>
 <body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v23.0"></script>
+
   {% include header.html %}
-  
+
   <main class="main-content">
     {{ content }}
   </main>

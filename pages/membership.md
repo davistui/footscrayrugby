@@ -193,38 +193,6 @@ permalink: /join/
 </div>
 
 <div class="content-section">
-  <h2>Registration Fees 2025</h2>
-  <div class="fees-table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Annual Fee</th>
-          <th>Includes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Senior Players</strong></td>
-          <td>$450</td>
-          <td>Training, matches, insurance, club membership</td>
-        </tr>
-        <tr>
-          <td><strong>Students/Concession</strong></td>
-          <td>$350</td>
-          <td>Same benefits with discount</td>
-        </tr>
-        <tr>
-          <td><strong>Social Members</strong></td>
-          <td>$200</td>
-          <td>Training only, social events</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="content-section">
   <h2>Training Schedule</h2>
   <div class="training-schedule">
     <div class="training-grid">
